@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Friendship Quest — Customizer & Personalization Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d081e;
+      --card-bg: #1a1533;
+      --card-border: #31255e;
+      --accent: #ff4081;
+      --gold: #ffd700;
+      --blue: #2979ff;
+      --text: #ffffff;
+      --text-muted: #b0bec5;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      padding: 24px;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    h1 {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 20px;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    p.subtitle {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    .card h2 {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 13px;
+      color: var(--accent);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--gold);
+    }
+
+    input[type="text"], textarea {
+      width: 100%;
+      background: #0d081e;
+      border: 1px solid var(--card-border);
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+
+    input[type="text"]:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    .preview-flex {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .avatar-preview {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 3px solid var(--gold);
+      background: #2a1b54;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .avatar-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 11px;
+      padding: 14px 24px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      color: #fff;
+      transition: transform 0.1s, opacity 0.2s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+
+    .btn-primary { background: #4caf50; }
+    .btn-secondary { background: var(--blue); }
+    .btn-accent { background: var(--accent); }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #4caf50;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      display: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>FRIENDSHIP QUEST STUDIO</h1>
+      <p class="subtitle">Customize the birthday person's name, face, photos & personal memories</p>
+    </header>
+
+    <!-- 1. Hero Identity -->
+    <div class="card">
+      <h2>👤 1. THE HERO'S IDENTITY</h2>
+      <div class="form-group">
+        <label>Birthday Person's Name</label>
+        <input type="text" id="recipientName" value="Alex" placeholder="e.g. Alex, Sarah, Michael">
+      </div>
+      <div class="form-group">
+        <label>Nickname / Role</label>
+        <input type="text" id="nickname" value="Partner in Crime" placeholder="e.g. Partner in Crime, Bestie">
+      </div>
+      <div class="form-group">
+        <label>Sender's Name</label>
+        <input type="text" id="senderName" value="Your Best Friend" placeholder="e.g. Sam, The Gang">
+      </div>
+    </div>
+
+    <!-- 2. Face Photo -->
+    <div class="card">
+      <h2>📸 2. PROTAGONIST'S FACE PHOTO</h2>
+      <div class="preview-flex">
+        <div class="avatar-preview">
+          <img id="faceImgPreview" src="./assets/character/face.png" alt="Hero Face">
+        </div>
+        <div style="flex: 1;">
+          <label>Select Face Photo (PNG/JPG)</label>
+          <input type="file" id="faceFileInput" accept="image/*" style="margin-bottom: 8px;">
+          <p style="font-size: 12px; color: var(--text-muted);">
+            Tip: Upload a clear, front-facing square photograph. It will be baked right onto the hero's pixel body with the party hat!
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Birthday Climax Letter -->
+    <div class="card">
+      <h2>🎂 3. FINAL BIRTHDAY LETTER</h2>
+      <div class="form-group">
+        <label>Celebration Title</label>
+        <input type="text" id="letterTitle" value="HAPPY BIRTHDAY, ALEX! 🎂🎉">
+      </div>
+      <div class="form-group">
+        <label>Tagline Message</label>
+        <input type="text" id="letterTagline" value="Some adventures end, but the memories we create together last forever.">
+      </div>
+      <div class="form-group">
+        <label>Heartfelt Letter Paragraphs (One per line)</label>
+        <textarea id="letterBody" rows="7">Dearest Alex,
+
+Happy, happy Birthday! Going through all these memories made me realize just how much brighter, crazier, and more wonderful life is with you in it.
+
+From the random spontaneous laughs to being there through thick and thin, having you as a friend is one of the greatest adventures ever.
+
+May this year bring you endless happiness, exciting new quests, big dreams come true, and plenty of cake! Here's to making a million more unforgettable memories together.
+
+With all my love and best wishes,
+— Your Best Friend ❤️</textarea>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="actions">
+      <button class="btn btn-primary" id="saveBtn">💾 SAVE CUSTOMIZATION</button>
+      <button class="btn btn-secondary" id="exportBtn">📥 EXPORT memories.js</button>
+      <a href="./index.html" class="btn btn-accent" target="_blank">🎮 PLAY GAME ➔</a>
+    </div>
+  </div>
+
+  <div id="toast" class="toast">Settings Saved Successfully!</div>
+
+  <script type="module">
+    import { BIRTHDAY_CONFIG } from './src/data/memories.js';
+
+    // Populate initial values
+    document.getElementById('recipientName').value = BIRTHDAY_CONFIG.recipientName;
+    document.getElementById('nickname').value = BIRTHDAY_CONFIG.nickname;
+    document.getElementById('senderName').value = BIRTHDAY_CONFIG.senderName;
+    document.getElementById('letterTitle').value = BIRTHDAY_CONFIG.finalCelebration.title;
+    document.getElementById('letterTagline').value = BIRTHDAY_CONFIG.finalCelebration.tagline;
+    document.getElementById('letterBody').value = BIRTHDAY_CONFIG.finalCelebration.letterParagraphs.join('\n\n');
+
+    // Face preview
+    const faceInput = document.getElementById('faceFileInput');
+    const facePreview = document.getElementById('faceImgPreview');
+    faceInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (evt) => {
+          facePreview.src = evt.target.result;
+          localStorage.setItem('custom_face_data', evt.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Save button
+    document.getElementById('saveBtn').addEventListener('click', () => {
+      const config = {
+        recipientName: document.getElementById('recipientName').value,
+        nickname: document.getElementById('nickname').value,
+        senderName: document.getElementById('senderName').value,
+        finalCelebration: {
+          title: document.getElementById('letterTitle').value,
+          tagline: document.getElementById('letterTagline').value,
+          letterParagraphs: document.getElementById('letterBody').value.split('\n\n').filter(p => p.trim().length > 0)
+        }
+      };
+      localStorage.setItem('friendship_quest_custom_config', JSON.stringify(config));
+      showToast('Customization saved to your browser! Click "Play Game" to test.');
+    });
+
+    // Export button
+    document.getElementById('exportBtn').addEventListener('click', () => {
+      const rName = document.getElementById('recipientName').value;
+      const nName = document.getElementById('nickname').value;
+      const sName = document.getElementById('senderName').value;
+      const title = document.getElementById('letterTitle').value;
+      const tagline = document.getElementById('letterTagline').value;
+      const paragraphs = document.getElementById('letterBody').value.split('\n\n').filter(p => p.trim().length > 0);
+
+      const code = `// Customized for ${rName}\nexport const BIRTHDAY_CONFIG = ${JSON.stringify({
+        recipientName: rName,
+        nickname: nName,
+        senderName: sName,
+        customFaceUrl: "./assets/character/face.png",
+        finalCelebration: {
+          title: title,
+          tagline: tagline,
+          letterParagraphs: paragraphs,
+          closingMessage: "Press Replay to play again, or browse all your memories in the Memory Album!"
+        }
+      }, null, 2)};\n`;
+
+      const blob = new Blob([code], { type: 'text/javascript' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'memories_config.js';
+      a.click();
+      showToast('Config file exported! Replace BIRTHDAY_CONFIG in src/data/memories.js');
+    });
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.innerText = msg;
+      t.style.display = 'block';
+      setTimeout(() => { t.style.display = 'none'; }, 3500);
+    }
+  </script>
+</body>
+</html>
+

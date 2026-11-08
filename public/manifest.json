@@ -1,0 +1,25 @@
+{
+  "name": "Friendship Quest — Birthday Adventure",
+  "short_name": "FriendshipQuest",
+  "description": "A personalized retro platformer birthday adventure game!",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0d081e",
+  "theme_color": "#1a103c",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
