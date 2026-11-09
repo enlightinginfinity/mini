@@ -48,14 +48,8 @@ export class PreloadScene extends Phaser.Scene {
       progressBar.fillRoundedRect(width / 2 - 146, height / 2 + 34, 292 * value, 12, 5);
     });
 
-    // Load Memory Photographs
-    for (let i = 1; i <= 5; i++) {
-      this.load.image(`photo_${i}`, `./assets/photos/photo${i}.png`);
-      for (let m = 1; m <= 5; m++) {
-        this.load.image(`photo_${i}_${m}`, `./assets/photos/photo${i}_${m}.png`);
-      }
-    }
-    this.load.image('photo_final', './assets/photos/photo_final.png');
+    // Lightweight preload: Chapter 1 cover photo for instant album preview
+    this.load.image('photo_1', './assets/photos/photo1.png');
   }
 
   create() {

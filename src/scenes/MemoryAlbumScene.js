@@ -178,15 +178,45 @@ export class MemoryAlbumScene extends Phaser.Scene {
       return;
     }
 
-    // Active Photo Container & Story Container
-    this.photoStage = this.add.container(0, 0);
-    this.storyStage = this.add.container(0, 0);
-    this.thumbsStage = this.add.container(0, 0);
+    this.loadChapterPhotos(chapterId, () => {
+      if (this.selectedChapter !== chapterId) return;
 
-    this.contentContainer.add([this.photoStage, this.storyStage, this.thumbsStage]);
+      // Active Photo Container & Story Container
+      this.photoStage = this.add.container(0, 0);
+      this.storyStage = this.add.container(0, 0);
+      this.thumbsStage = this.add.container(0, 0);
 
-    this.renderChapterPhoto();
-    this.renderChapterThumbnails();
+      this.contentContainer.add([this.photoStage, this.storyStage, this.thumbsStage]);
+
+      this.renderChapterPhoto();
+      this.renderChapterThumbnails();
+    });
+  }
+
+  loadChapterPhotos(chapterId, callback) {
+    const toLoad = [];
+    const coverKey = `photo_${chapterId}`;
+    if (!this.textures.exists(coverKey)) {
+      toLoad.push({ key: coverKey, url: `./assets/photos/photo${chapterId}.png` });
+    }
+    for (let m = 1; m <= 5; m++) {
+      const key = `photo_${chapterId}_${m}`;
+      if (!this.textures.exists(key)) {
+        toLoad.push({ key: key, url: `./assets/photos/photo${chapterId}_${m}.png` });
+      }
+    }
+
+    if (toLoad.length === 0) {
+      callback();
+      return;
+    }
+
+    toLoad.forEach(item => {
+      this.load.image(item.key, item.url);
+    });
+
+    this.load.once('complete', callback);
+    this.load.start();
   }
 
   renderChapterPhoto() {

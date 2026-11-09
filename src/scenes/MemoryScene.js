@@ -25,6 +25,19 @@ export class MemoryScene extends Phaser.Scene {
     this.activePhotoIndex = 0;
   }
 
+  preload() {
+    const coverKey = `photo_${this.levelId}`;
+    if (!this.textures.exists(coverKey)) {
+      this.load.image(coverKey, `./assets/photos/photo${this.levelId}.png`);
+    }
+    for (let m = 1; m <= 5; m++) {
+      const key = `photo_${this.levelId}_${m}`;
+      if (!this.textures.exists(key)) {
+        this.load.image(key, `./assets/photos/photo${this.levelId}_${m}.png`);
+      }
+    }
+  }
+
   create() {
     const width = this.scale.width;
     const height = this.scale.height;

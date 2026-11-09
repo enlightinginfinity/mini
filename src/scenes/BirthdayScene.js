@@ -13,6 +13,12 @@ export class BirthdayScene extends Phaser.Scene {
     super('BirthdayScene');
   }
 
+  preload() {
+    if (!this.textures.exists('photo_final')) {
+      this.load.image('photo_final', './assets/photos/photo_final.png');
+    }
+  }
+
   create() {
     const width = this.scale.width;
     const height = this.scale.height;

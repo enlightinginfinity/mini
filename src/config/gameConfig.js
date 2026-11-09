@@ -39,7 +39,15 @@ export const gameConfig = {
   pauseOnBlur: false,
   fps: {
     target: 60,
-    forceSetTimeOut: true
+    forceSetTimeOut: false,
+    smoothStep: true
+  },
+  render: {
+    antialias: true,
+    pixelArt: false,
+    roundPixels: true,
+    powerPreference: 'high-performance',
+    batchSize: 2048
   },
   scene: [
     BootScene,
