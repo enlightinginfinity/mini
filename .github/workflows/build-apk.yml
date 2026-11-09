@@ -30,9 +30,8 @@ jobs:
           sed -i 's/android:launchMode="singleTask"/android:launchMode="singleTask" android:screenOrientation="sensorLandscape"/' $M
           sed -i 's#<style name="AppTheme.NoActionBar" parent="Theme.AppCompat.DayNight.NoActionBar">#&<item name="android:windowFullscreen">true</item><item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>#' android/app/src/main/res/values/styles.xml
           mkdir -p assets
-          convert public/assets/icons/icon-512.png -resize 1024x1024 assets/icon-only.png
-          cp assets/icon-only.png assets/icon-foreground.png
-          convert -size 1024x1024 xc:'#1a103c' assets/icon-background.png
+          python3 -m pip install --quiet --break-system-packages pillow
+          python3 -c "from PIL import Image; im=Image.open('public/assets/icons/icon-512.png').convert('RGBA').resize((1024,1024)); im.save('assets/icon-only.png'); im.save('assets/icon-foreground.png'); Image.new('RGB',(1024,1024),'#1a103c').save('assets/icon-background.png')"
           npx capacitor-assets generate --android || true
           npx cap sync android
       - name: Build APK
